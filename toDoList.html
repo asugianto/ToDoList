@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style/toDoList.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alexander Sugianto To-Do List</title>
+</head>
+
+<body ng-app="ToDoListApp" ng-controller="toDoController" ng-cloak>
+
+    <ng-view></ng-view>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/app-config.js"></script>
+    <script src="js/toDoList-service.js"></script>
+    <script src="js/toDoList-controller.js"></script>
+</body>
+</html>

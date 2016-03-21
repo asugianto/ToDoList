@@ -1,0 +1,97 @@
+<div class="toDoListHeader">
+    Alexander Sugianto To-Do List
+</div>
+
+<div class="toDoListBody">
+
+    <div class="toDoListWrapper">
+        <ul ui-sortable ng-model="toDoLists">
+            <li ng-repeat="item in toDoLists" ng-show="!item.done" class="list {{item.done ? 'fold-animation' : ''}}">
+                <div class="row">
+                    <input class="col-md-1 markedItem" type="checkbox" ng-model="item.done" ng-click="checkMarkedToDo()"/>
+
+                    <!-- Clickable area to go to detail-->
+                    <a href="#Detail/{{item.id}}">
+
+                        <div class="col-md-2 priority">
+                            <i class="fa fa-ban red" ng-show="item.priority === 'High'"> High</i>
+                            <i class="fa fa-angle-double-up red" ng-show="item.priority === 'Medium'"> Medium</i>
+                            <i class="fa fa-angle-double-down" ng-show="item.priority === 'Low'"> Low</i>
+                        </div>
+                        <div class="col-md-4">{{item.taskName}}</div>
+                        <div class="col-md-4">{{item.dueDate | date: 'mediumDate'}}</div>
+
+                    </a>
+
+                    <i class="col-md-1 fa fa-trash-o removeItem" ng-click="removeToDo(item)"></i>
+                </div>
+            </li>
+        </ul>
+
+        <div ng-show="isToDoListsEmpty" class="emptyToDo">No Item on your to-do list yet, click the button below to add one</div>
+    </div>
+
+    <script type="text/ng-template" id="addToDoModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Add To-Do Task</h3>
+        </div>
+        <div class="modal-body" ng-form name="addForm">
+            <div class="row modalStyle">
+                <div class="col-md-3">Task Name<span class="red">*</span></div>
+                <div class="col-md-4">
+                    <input name="taskName" type="text" ng-model="addToDo.taskName"
+                           class="{{addForm.taskName.$error.required ? 'inputError' : ''}}" required/>
+                </div>
+                <div class="error col-md-4" ng-show="addForm.taskName.$error.required">This field is required</div>
+            </div>
+
+            <div class="row modalStyle">
+                <div class="col-md-3">Priority<span class="red">*</span></div>
+                <div class="col-md-4">
+                    <select name="priority" ng-model="addToDo.priority" ng-options="priority for priority in toDoPriorities"
+                            class="{{addForm.priority.$error.required ? 'inputError' : ''}}" required/></select>
+                </div>
+                <div class="error col-md-4" ng-show="addForm.priority.$error.required">This field is required</div>
+            </div>
+
+            <div class="row modalStyle">
+                <div class="col-md-3">Due Date</div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" uib-datepicker-popup="mediumDate"
+                           ng-model="addToDo.dueDate"
+                           is-open="testDateOpen"
+                           ng-click="datePickerOpen()"
+                           close-text="Close" />
+                </div>
+            </div>
+
+            <div class="row modalStyle">
+                <div class="col-md-3">Description</div>
+                <div class="col-md-6"><textarea class="form-control" ng-model="addToDo.description" rows="5"></textarea></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="close()">Cancel</button>
+            <button class="btn btn-warning" type="button" ng-click="add()">Add Task</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="removeToDoModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Delete {{toDoToBeDeleted.taskName}}</h3>
+        </div>
+        <div class="modal-body deleteModal">
+            Are you sure you want to delete <b>{{toDoToBeDeleted.taskName}}</b> ? (this will delete your task permanently from the list)
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="close()">Cancel</button>
+            <button class="btn btn-danger" type="button" ng-click="delete()">Delete</button>
+        </div>
+    </script>
+
+    <button ng-show="!showAddToDo" ng-click="open()" class="btn btn-default">Add To-Do Task</button>
+
+    <!-- Uncomment these codes if you want to see the real-time data moving in action -->
+    <!--<br/>-->
+    <!--<pre ng-bind="toDoLists|json"></pre>-->
+</div>

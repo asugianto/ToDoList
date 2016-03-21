@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    height: 100%;
+    background-color: #EFEDE8;
+}
+
+.toDoListHeader, .toDoListBody, .toDoNavigation {
+    width: 60%;
+    margin: 0px auto;
+    margin-top: 20px;
+}
+
+.toDoListHeader, .toDoListDetail {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #D0C3C3;
+}
+
+.toDoListHeader {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.toDoListBody {
+
+    .toDoListWrapper {
+        border: 3px dotted grey;
+        border-radius: 10px;
+        margin-bottom: 15px;
+
+        .priority {
+            font-size: 13px;
+            line-height: 25px;
+        }
+        .list {
+            background: #AFCCEC;
+            padding: 15px;
+            border: 1px solid #999;
+            margin: 5px;
+            font-size: 18px;
+        }
+    }
+
+    .toDoListDetail {
+        padding: 10px;
+    }
+
+    ul {
+        padding-left:0px;
+
+        li {
+            cursor: move;
+            list-style: none;
+            border-radius: 5px;
+        }
+    }
+
+    .markedItem {
+        left: 15px;
+    }
+
+    .removeItem {
+        top:2px;
+        cursor: pointer;
+    }
+
+    .emptyToDo {
+        text-align: center;
+        margin: 15px;
+        color: grey;
+        font-size: 18px;
+    }
+}
+
+.modal-body {
+    min-height: 270px;
+}
+
+.modalStyle {
+    font-size: 18px;
+    height:40px;
+    margin: 0 auto;
+
+    .inputError {
+        border: 1px solid red;
+    }
+    .error {
+        font-size: 12px;
+        color: red;
+        padding-left: 20px;
+        line-height: 26px;
+    }
+}
+
+.deleteModal {
+    min-height: 0px;
+}
+
+.red {
+    color: red;
+}
+
+// Animation
+/* since a hardcoded duration value of 1 was provided in the JavaScript animation code,
+the CSS classes below will be transitioned despite them being defined as regular CSS classes */
+.reds { background:red; }
+.large-text { font-size:20px; }
+
+/* we can also use a keyframe animation and $animateCss will make it work alongside the transition */
+.pulse-twice {
+    animation: 0.5s pulse linear 2;
+    -webkit-animation: 0.5s pulse linear 2;
+}
+
+@keyframes pulse {
+    from { transform: scale(0.5); }
+    to { transform: scale(1.5); }
+}
+
+@-webkit-keyframes pulse {
+    from { -webkit-transform: scale(0.5); }
+    to { -webkit-transform: scale(1.5); }
+}

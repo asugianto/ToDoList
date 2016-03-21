@@ -1,0 +1,69 @@
+<div class="toDoNavigation">
+    <a href="#/"><i class="fa fa-angle-double-left"></i> Go Back to List View</a>
+</div>
+
+<div class="toDoListHeader">
+    Details of {{detailData.taskName}}
+</div>
+<div class="toDoListBody">
+    <div class="toDoListDetail" ng-form name="detailForm">
+        <!-- Task Name -->
+        <div class="row modalStyle">
+            <div class="col-md-4">Task Name <span class="red">*</span></div>
+            <div class="col-md-4">
+                <span ng-show="!edit">{{detailData.taskName}}</span>
+                <input name="taskName" ng-show="edit" type="text" ng-model="detailData.taskName"
+                   class="{{detailForm.taskName.$error.required ? 'inputError' : ''}}" required/>
+            </div>
+            <div class="error col-md-4" ng-show="detailForm.taskName.$error.required && edit">This field is required</div>
+        </div>
+
+        <!-- Priority -->
+        <div class="row modalStyle">
+            <div class="col-md-4">Priority <span class="red">*</span></div>
+            <div class="col-md-4">
+                <span ng-show="!edit">
+                    <div class="priority">
+                        <i class="fa fa-ban red" ng-show="detailData.priority === 'High'"> High</i>
+                        <i class="fa fa-angle-double-up red" ng-show="detailData.priority === 'Medium'"> Medium</i>
+                        <i class="fa fa-angle-double-down" ng-show="detailData.priority === 'Low'"> Low</i>
+                    </div>
+                </span>
+                <select name="priority" ng-show="edit" ng-model="detailData.priority" ng-options="priority for priority in toDoPriorities"
+                        class="{{detailForm.priority.$error.required ? 'inputError' : ''}}" required/></select>
+            </div>
+            <div class="error col-md-4" ng-show="detailForm.priority.$error.required && edit">This field is required</div>
+        </div>
+
+        <!-- Due Date -->
+        <div class="row modalStyle">
+            <div class="col-md-4">Due Date</div>
+            <div class="col-md-8">
+                <span ng-show="!edit">{{detailData.dueDate | date: 'mediumDate'}}</span>
+                <input ng-show="edit" type="text" class="form-control" uib-datepicker-popup="mediumDate"
+                       uib-datepicker-options="toDoDatepicker"
+                       ng-model="detailData.dueDate"
+                       is-open="testDateOpen"
+                       ng-click="datePickerOpen()"
+                       close-text="Close" />
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="row modalStyle">
+            <div class="col-md-4">Description</div>
+            <div class="col-md-8">
+                <span ng-show="!edit">{{detailData.description}}</span>
+                <textarea ng-show="edit" class="form-control" ng-model="detailData.description" rows="5"></textarea>
+            </div>
+        </div>
+
+        <div class="toDoListDetailFooter">
+            <button class="btn btn-default" ng-show="!edit" ng-click="edit = true">Edit</button>
+            <div class="text-right">
+                <button class="btn btn-warning" ng-show="edit" ng-click="edit = false">Cancel</button>
+                <button class="btn btn-primary" ng-show="edit" ng-click="updateData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
